@@ -1,5 +1,5 @@
 # Core AI & Machine Learning
-tensorflow==2.16.1
+tensorflow==2.20.0
 tensorflow-datasets==4.9.4
 numpy==1.26.4
 pandas==2.2.3
