@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmotionSense – AI Emotion Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <header>
+    <h1>EmotionSense</h1>
+    <p>AI-Powered Facial Emotion Recognition</p>
+  </header>
+
+  <main class="container">
+    <section class="upload-box">
+      <h2>Upload an Image</h2>
+      <p>Our AI model will detect and interpret the emotion behind the expression.</p>
+
+      <form action="/" method="post" enctype="multipart/form-data" class="upload-form">
+        <label for="image" class="file-label">Choose a face image</label>
+        <input id="image" type="file" name="image" accept="image/*" required hidden>
+        <button type="submit" class="btn">Analyze Emotion</button>
+      </form>
+
+      {% if prediction %}
+        <div class="result-box fade-in">
+          <h3>Detected Emotion:</h3>
+          <p class="emotion">{{ prediction }}</p>
+
+          {% if image_path %}
+            <div class="image-preview">
+              <img src="{{ image_path }}" alt="Uploaded face">
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if error %}
+        <div class="error-box fade-in">
+          <p><strong>Error:</strong> {{ error }}</p>
+        </div>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer>
+    <p>© {{ 2025 }} EmotionSense | Designed by Nweze 22CG031891</p>
+  </footer>
+
+  <script>
+    // display file name when selected
+    const fileInput = document.getElementById("image");
+    const fileLabel = document.querySelector(".file-label");
+    fileInput.addEventListener("change", () => {
+      const fileName = fileInput.files[0]?.name || "Choose a face image";
+      fileLabel.textContent = fileName;
+    });
+  </script>
+</body>
+</html>
